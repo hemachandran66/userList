@@ -1,0 +1,53 @@
+<div class="dashboard-container">
+  <div class="header-strip">
+    <ul class="nav nav-tabs">
+      <li class="nav-item">
+        <a class="nav-link active" aria-current="page" href="#"><i class="bi bi-list-check"></i>Saved List</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="bi bi-funnel"></i>Saved Filters</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="#"><i class="bi bi-clock-history"></i>Search History</a>
+      </li>
+    </ul>
+    <div class="search-container">
+      <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="off"
+        placeholder="Search">
+    </div>
+  </div>
+  <div class="table-container">
+    <table class="table">
+      <thead>
+        <tr>
+          <th *ngFor="let column of columns">{{column.title}}</th>
+          <th>Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let data of datas| filter:searchText ;let i= index">
+          <td>{{data.date | date:'MMM d'}}</td>
+          <td>{{data.name}}</td>
+          <td>{{data.entities}}</td>
+          <td>
+            <i class="bi bi-envelope-at"></i>
+            <i class="bi bi-share"></i>
+            <i class="bi bi-pencil"></i>
+            <i class="bi bi-trash3"></i>
+          </td>
+          <td>
+            <button (click)="showDetails(i)">Details</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+    <div class="dashboard-left-container">
+      <div class="description-container">
+        <p>No description yet <button>+ Add Description</button></p>
+      </div>
+      <div class="details-container" *ngFor="let detail of details">
+        <p class="detail-tag">{{detail.name}}</p>
+      </div>
+    </div>
+  </div>
+</div>
